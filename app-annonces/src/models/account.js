@@ -10,7 +10,11 @@ const Account = (sequelize, DataTypes) => {
     }
     Account.init({
         id: { type: DataTypes.STRING(255), allowNull: false, primaryKey: true },
-        role: { type: DataTypes.BOOLEAN, allowNull: false, defaultValue: false },
+        role: { 
+            type: DataTypes.STRING(20), 
+            allowNull: false, 
+            defaultValue: 'user' 
+        },
         name: { type: DataTypes.STRING(255), allowNull: false },
         firstname: { type: DataTypes.STRING(255), allowNull: false },
         email: { type: DataTypes.STRING(255), allowNull: false },

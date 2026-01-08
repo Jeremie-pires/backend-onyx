@@ -1,4 +1,6 @@
 const { Op } = require('sequelize');
+const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
 const { Account, Address, Order, Ticket, dbInstance } = require('../models');
 
 const getAccountById = async (req, res) => {
@@ -49,8 +51,11 @@ const createAccount = async (req, res) => {
     const transaction = await dbInstance.transaction();
     try {
         const { id, address_id, name, firstname, email, password, phone, role } = req.body;
+
+        const hashedPassword = await bcrypt.hash(password, 10);
+
         const account = await Account.create({
-            id, address_id, name, firstname, email, password, phone, role
+            id, address_id, name, firstname, email, password: hashedPassword, phone, role
         }, { transaction });
         await transaction.commit();
         const { password: _, ...accountWithoutPassword } = account.toJSON();
@@ -90,4 +95,57 @@ const deleteAccount = async (req, res) => {
     }
 }
 
-module.exports = { getAccountById, createAccount, searchAccount, updateAccount, deleteAccount };
+const login = async (req, res) => {
+    try {
+        const { email, password } = req.body;
+        
+        if (!email || !password) {
+            return res.status(400).json({ message: 'Email et mot de passe requis' });
+        }
+        const account = await Account.findOne({ where: { email } });
+        if (!account) {
+            return res.status(401).json({ message: 'Email ou mot de passe incorrect' });
+        }
+        
+        const isPasswordValid = await bcrypt.compare(password, account.password);
+        
+        if (!isPasswordValid) {
+            return res.status(401).json({ message: 'Email ou mot de passe incorrect' });
+        }
+        const token = jwt.sign(
+            { 
+                id: account.id, 
+                email: account.email, 
+                role: account.role 
+            },
+            process.env.JWT_SECRET,
+            { expiresIn: process.env.JWT_EXPIRES_IN || '24h' }
+        );
+        
+        const { password: _, ...accountWithoutPassword } = account.toJSON();
+        
+        res.status(200).json({
+            message: 'Connexion réussie',
+            token,
+            user: accountWithoutPassword
+        });
+        
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+}
+
+const logout = async (req, res) => {
+    try {
+        // Avec JWT, le logout est géré côté client
+        // Cette route confirme simplement que le token est valide avant déconnexion
+        res.status(200).json({ 
+            message: 'Déconnexion réussie',
+            info: 'Supprimez le token côté client'
+        });
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+}
+
+module.exports = { getAccountById, createAccount, searchAccount, updateAccount, deleteAccount, login, logout };
