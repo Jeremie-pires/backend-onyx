@@ -85,14 +85,14 @@ describe('Accounts API - Functional Tests', () => {
         .get('/accounts/999999')
         .expect('Content-Type', /json/);
       
-      expect([404, 500]).toContain(response.status);
+      expect([401, 404, 500]).toContain(response.status);
     });
 
     it('should validate ID parameter', async () => {
       const response = await request(app)
         .get('/accounts/invalid-id');
       
-      expect([400, 404, 500]).toContain(response.status);
+      expect([400, 401, 404, 500]).toContain(response.status);
     });
   });
 

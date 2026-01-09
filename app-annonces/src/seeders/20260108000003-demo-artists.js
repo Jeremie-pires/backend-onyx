@@ -5,42 +5,37 @@ module.exports = {
   async up (queryInterface, Sequelize) {
     await queryInterface.bulkInsert('Artists', [
       {
+        id: '1',
         name: 'The Rolling Stones',
-        genre: 'Rock',
-        bio: 'Legendary British rock band formed in London in 1962',
-        image_url: 'https://example.com/rolling-stones.jpg',
+        description: 'Legendary British rock band formed in London in 1962',
         createdAt: new Date(),
         updatedAt: new Date()
       },
       {
+        id: '2',
         name: 'Daft Punk',
-        genre: 'Electronic',
-        bio: 'French electronic music duo formed in 1993',
-        image_url: 'https://example.com/daft-punk.jpg',
+        description: 'French electronic music duo formed in 1993',
         createdAt: new Date(),
         updatedAt: new Date()
       },
       {
+        id: '3',
         name: 'Beyoncé',
-        genre: 'Pop/R&B',
-        bio: 'American singer, songwriter, and actress',
-        image_url: 'https://example.com/beyonce.jpg',
+        description: 'American singer, songwriter, and actress',
         createdAt: new Date(),
         updatedAt: new Date()
       },
       {
+        id: '4',
         name: 'Pink Floyd',
-        genre: 'Progressive Rock',
-        bio: 'English rock band formed in London in 1965',
-        image_url: 'https://example.com/pink-floyd.jpg',
+        description: 'English rock band formed in London in 1965',
         createdAt: new Date(),
         updatedAt: new Date()
       },
       {
+        id: '5',
         name: 'Coldplay',
-        genre: 'Alternative Rock',
-        bio: 'British rock band formed in London in 1996',
-        image_url: 'https://example.com/coldplay.jpg',
+        description: 'British rock band formed in London in 1996',
         createdAt: new Date(),
         updatedAt: new Date()
       }

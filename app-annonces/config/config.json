@@ -5,5 +5,12 @@
     "database": "monannonce",
     "host": "db",
     "dialect": "mariadb"
+  },
+  "test": {
+    "username": "root",
+    "password": "root",
+    "database": "test_db",
+    "host": "app-annonces-db",
+    "dialect": "mariadb"
   }
 }

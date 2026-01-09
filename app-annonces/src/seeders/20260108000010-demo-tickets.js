@@ -3,49 +3,54 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up (queryInterface, Sequelize) {
-    await queryInterface.bulkInsert('Order_Item_Merchs', [
+    await queryInterface.bulkInsert('Tickets', [
       {
         id: '1',
+        qrcode: 'QR-' + Date.now() + '-1',
+        event_id: '1',
         order_id: '1',
-        product_id: '6',
-        quantity: 1,
-        price_sold_unit: 35.00,
+        account_id: '1',
+        price_sold: 150.00,
         createdAt: new Date(),
         updatedAt: new Date()
       },
       {
         id: '2',
+        qrcode: 'QR-' + Date.now() + '-2',
+        event_id: '1',
         order_id: '2',
-        product_id: '1',
-        quantity: 1,
-        price_sold_unit: 25.00,
+        account_id: '2',
+        price_sold: 89.99,
         createdAt: new Date(),
         updatedAt: new Date()
       },
       {
         id: '3',
+        qrcode: 'QR-' + Date.now() + '-3',
+        event_id: '2',
         order_id: '3',
-        product_id: '2',
-        quantity: 1,
-        price_sold_unit: 20.00,
+        account_id: '3',
+        price_sold: 45.00,
         createdAt: new Date(),
         updatedAt: new Date()
       },
       {
         id: '4',
+        qrcode: 'QR-' + Date.now() + '-4',
+        event_id: '3',
         order_id: '4',
-        product_id: '3',
-        quantity: 1,
-        price_sold_unit: 15.00,
+        account_id: '4',
+        price_sold: 120.00,
         createdAt: new Date(),
         updatedAt: new Date()
       },
       {
         id: '5',
+        qrcode: 'QR-' + Date.now() + '-5',
+        event_id: '3',
         order_id: '5',
-        product_id: '5',
-        quantity: 1,
-        price_sold_unit: 12.00,
+        account_id: '5',
+        price_sold: 75.00,
         createdAt: new Date(),
         updatedAt: new Date()
       }
@@ -53,6 +58,6 @@ module.exports = {
   },
 
   async down (queryInterface, Sequelize) {
-    await queryInterface.bulkDelete('Order_Item_Merchs', null, {});
+    await queryInterface.bulkDelete('Tickets', null, {});
   }
 };

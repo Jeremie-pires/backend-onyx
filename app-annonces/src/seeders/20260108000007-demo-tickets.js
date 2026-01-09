@@ -1,70 +1,57 @@
 'use strict';
+const { v4: uuidv4 } = require('crypto');
 
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up (queryInterface, Sequelize) {
     await queryInterface.bulkInsert('Tickets', [
-      // Tickets pour Rock Festival Paris 2026
       {
-        eventId: 1,
-        accountId: 1,
-        ticket_type: 'VIP',
-        price: 150.00,
-        purchase_date: new Date('2025-12-01'),
-        status: 'active',
+        id: '1',
+        qrcode: 'QR-' + Date.now() + '-1',
+        event_id: '1',
+        order_id: '1',
+        account_id: '1',
+        price_sold: 150.00,
         createdAt: new Date(),
         updatedAt: new Date()
       },
       {
-        eventId: 1,
-        accountId: 2,
-        ticket_type: 'Standard',
-        price: 89.99,
-        purchase_date: new Date('2025-12-15'),
-        status: 'active',
-        createdAt: new Date(),
-        updatedAt: new Date()
-      },
-      // Tickets pour Electronic Music Night
-      {
-        eventId: 2,
-        accountId: 3,
-        ticket_type: 'Standard',
-        price: 45.00,
-        purchase_date: new Date('2026-01-05'),
-        status: 'active',
-        createdAt: new Date(),
-        updatedAt: new Date()
-      },
-      // Tickets pour Summer Pop Concert
-      {
-        eventId: 3,
-        accountId: 4,
-        ticket_type: 'VIP',
-        price: 120.00,
-        purchase_date: new Date('2026-01-10'),
-        status: 'active',
+        id: '2',
+        qrcode: 'QR-' + Date.now() + '-2',
+        event_id: '1',
+        order_id: '2',
+        account_id: '2',
+        price_sold: 89.99,
         createdAt: new Date(),
         updatedAt: new Date()
       },
       {
-        eventId: 3,
-        accountId: 5,
-        ticket_type: 'Standard',
-        price: 75.00,
-        purchase_date: new Date('2026-01-12'),
-        status: 'active',
+        id: '3',
+        qrcode: 'QR-' + Date.now() + '-3',
+        event_id: '2',
+        order_id: '3',
+        account_id: '3',
+        price_sold: 45.00,
         createdAt: new Date(),
         updatedAt: new Date()
       },
-      // Tickets pour Jazz Festival
       {
-        eventId: 4,
-        accountId: 1,
-        ticket_type: 'Standard',
-        price: 65.00,
-        purchase_date: new Date('2026-01-08'),
-        status: 'active',
+        id: '4',
+        qrcode: 'QR-' + Date.now() + '-4',
+        event_id: '3',
+        order_id: '4',
+        account_id: '4',
+        price_sold: 120.00,
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
+      {
+        id: '5',
+        qrcode: 'QR-' + Date.now() + '-5',
+        event_id: '3',
+        order_id: '5',
+        account_id: '5',
+        price_sold: 75.00,
         createdAt: new Date(),
         updatedAt: new Date()
       }
